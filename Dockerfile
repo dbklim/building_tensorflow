@@ -30,6 +30,8 @@ RUN ./install_bazel.sh 0.21.0
 # Копирование модифицированных скриптов
 RUN cp run_configure_cpu_1.13.1 tensorflow/run_configure_cpu_1.13.1
 RUN cp run_configure_gpu_1.13.1 tensorflow/run_configure_gpu_1.13.1
+RUN chmod +x tensorflow/run_configure_cpu_1.13.1
+RUN chmod +x tensorflow/run_configure_gpu_1.13.1
 
 # Изменение локализации для вывода кириллицы в терминале
 RUN locale-gen en_US.UTF-8
