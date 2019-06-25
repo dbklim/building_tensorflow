@@ -20,8 +20,11 @@ WORKDIR /build_tensorflow
 # Загрузка исходных файлов TensorFlow
 RUN git clone https://github.com/tensorflow/tensorflow.git
 
-# Установка необходимой версии Bazel
+# Присваивание разрешения на выполнение
 RUN chmod +x install_bazel.sh
+RUN chmod +x build.sh
+
+# Установка необходимой версии Bazel
 RUN ./install_bazel.sh 0.21.0
 
 # Копирование модифицированных скриптов
