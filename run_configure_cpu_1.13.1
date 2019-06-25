@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+spawn ./configure
+
+# Default location of python
+expect ":"
+send "\n"
+
+# Default python library path
+expect ":"
+send "\n"
+
+expect "Do you wish to build TensorFlow with XLA JIT support?"
+send "y\n"
+
+expect "Do you wish to build TensorFlow with OpenCL SYCL support?"
+send "n\n"
+
+expect "Do you wish to build TensorFlow with ROCm support?"
+send "n\n"
+
+expect "Do you wish to build TensorFlow with CUDA support?"
+send "n\n"
+
+expect "Do you wish to download a fresh release of clang?"
+send "n\n"
+
+# MPI нужно в случае, когда у нас несколько GPU в машине и обучать мы хотим на всех сразу
+expect "Do you wish to build TensorFlow with MPI support?"
+send "n\n"
+
+# По умолчанию в linux использует флаг -march=native, который автоматически определяет, какие инструкции поддерживает CPU
+expect "Please specify optimization flags to use during compilation when bazel option \"--config=opt\" is specified"
+send "\n"
+
+expect "Would you like to interactively configure ./WORKSPACE for Android builds?"
+send "n\n"
+
+interact

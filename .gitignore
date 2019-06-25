@@ -1,0 +1,4 @@
+tensorflow/
+ngraph/
+bazel*.sh
+*.whl

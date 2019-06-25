@@ -1,0 +1,5 @@
+.git/
+tensorflow/
+ngraph/
+*.whl
+mkl/
