@@ -24,17 +24,23 @@ else
 fi
 
 echo -e "\nSTEP 3 Build\n"
-#bazel build --config=opt --config=mkl --noincompatible_strict_action_env //tensorflow/tools/pip_package:build_pip_package
-bazel build --config=opt --noincompatible_strict_action_env //tensorflow/tools/pip_package:build_pip_package
+if [[ $1 = 'mkl' ]] || [[ $2 = 'mkl' ]]
+then
+    MKL="-MKL"
+    bazel build --config=opt --config=mkl --noincompatible_strict_action_env //tensorflow/tools/pip_package:build_pip_package
+else
+    MKL=""
+    bazel build --config=opt --noincompatible_strict_action_env //tensorflow/tools/pip_package:build_pip_package
+fi
 
 echo -e "\nSTEP 4 Create wheel\n"
 CPU_MODEL=$(cat /proc/cpuinfo | grep -m 1 "model name" | grep -o "\S[0-9]\?-\?[0-9]\{3,5\}\S" | sed "s/\s//g")
-if [[ $1 = 'gpu' ]]
+if [[ $1 = 'gpu' ]] || [[ $2 = 'gpu' ]]
 then 
     GPU_MODEL=$(nvidia-smi | grep -o -m 1 "GeForce\s\S*\s[0-9]\{0,4\}" | sed "s/\s//g")
-    NAME="tensorflow-$CPU_MODEL-$GPU_MODEL"
+    NAME="tensorflow-$CPU_MODEL-$GPU_MODEL$MKL"
 else 
-    NAME="tensorflow-$CPU_MODEL"
+    NAME="tensorflow-$CPU_MODEL$MKL"
 fi
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /mnt --project_name $NAME
 

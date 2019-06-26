@@ -45,5 +45,7 @@ RUN apt-get -y autoclean
 RUN apt-get -y clean
 
 #ENTRYPOINT ./run_rest_server.sh
+#CMD ["./build.sh", "gpu", "mkl"]
+#CMD ["./build.sh", "mkl"]
 #CMD ["./build.sh", "gpu"]
 CMD ["./build.sh"]
