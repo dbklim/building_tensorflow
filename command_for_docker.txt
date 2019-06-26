@@ -1,8 +1,8 @@
 Запустить контейнер (-t - запуск терминала, -i - интерактивный режим, --rm - удалить контейнер при завершении работы запускаемого приложения, -p 5000:5000 - пробросить все подключения на порт 5000 к машине-хосту в контейнер на порт 5000, --cpuset-cpus="0" - запустить на ядре "0"):
 sudo docker run -ti --rm -v "$PWD:/mnt" -e HOST_PERMS="$(id -u):$(id -g)" build_tensorflow_1.13.1:0.1 bash
 
-sudo docker run --cpuset-cpus="0-11" -m 8GB -ti --rm -v "$PWD:/mnt" -e HOST_PERMS="$(id -u):$(id -g)" build_tensorflow_1.13.1:0.1
-sudo docker run --cpuset-cpus="0-11" -m 8GB --runtime=nvidia -ti --rm -v "$PWD:/mnt" -e HOST_PERMS="$(id -u):$(id -g)" build_tensorflow_gpu_1.13.1:0.1
+sudo docker run --cpuset-cpus="0-4" -m 8GB -ti --rm -v "$PWD:/mnt" -e HOST_PERMS="$(id -u):$(id -g)" build_tensorflow_1.13.1:0.1
+sudo docker run --cpuset-cpus="5-10" -m 8GB --runtime=nvidia -ti --rm -v "$PWD:/mnt" -e HOST_PERMS="$(id -u):$(id -g)" build_tensorflow_gpu_1.13.1:0.1
 
 Собрать образ с меткой build_tensorflow_1.13.1:0.1 на основе Dockerfile (. - директория, из которой вызывается docker build, точка - значит в текущей директории находятся все файлы для образа):
 sudo docker build -t build_tensorflow_1.13.1:0.1 .
