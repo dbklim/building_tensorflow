@@ -1,0 +1,47 @@
+#!/usr/bin/expect
+
+spawn ./configure
+
+expect "Please specify the location of python*"
+send "\n"
+
+expect "Please input the desired Python library path to use*"
+send "\n"
+
+expect "Do you wish to build TensorFlow with XLA JIT support?"
+send "y\n"
+
+expect "Do you wish to build TensorFlow with OpenCL SYCL support?"
+send "n\n"
+
+expect "Do you wish to build TensorFlow with ROCm support?"
+send "n\n"
+
+expect "Do you wish to build TensorFlow with CUDA support?"
+send "y\n"
+
+expect "Do you wish to build TensorFlow with TensorRT support?"
+send "n\n"
+
+# Для видеокарт Tesla P4, Tesla V100, Tesla T4, GeForce GTX 1070[Ti]/1080[Ti], GeForce RTX 2070[Ti]/2080[Ti], MX150, MX250 (https://en.wikipedia.org/wiki/CUDA)
+expect "Please note that each additional compute capability significantly increases your build time and binary size*"
+send "6.1,7.0,7.5\n"
+
+expect "Do you want to use clang as CUDA compiler?"
+send "n\n"
+
+expect "Please specify which gcc should be used by nvcc as the host compiler.*"
+send "\n"
+
+# MPI нужно в случае, когда у нас несколько GPU в машине и обучать мы хотим на всех сразу (нужно отдельно устанавливать MPI)
+expect "Do you wish to build TensorFlow with MPI support?"
+send "n\n"
+
+# По умолчанию в linux использует флаг -march=native, который автоматически определяет, какие инструкции поддерживает CPU
+expect "Please specify optimization flags to use during compilation when bazel option \"--config=opt\" is specified*"
+send "\n"
+
+expect "Would you like to interactively configure ./WORKSPACE for Android builds?"
+send "n\n"
+
+interact

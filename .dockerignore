@@ -1,5 +1,12 @@
-.git/
 tensorflow/
 ngraph/
+source*/
+TEMP/
+mkl*/
+env_*/
+built_*/
+bazel*.sh
 *.whl
-mkl/
+tensorflow*.zip
+temp*
+test*

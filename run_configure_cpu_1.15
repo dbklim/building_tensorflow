@@ -2,12 +2,10 @@
 
 spawn ./configure
 
-# Default location of python
-expect ":"
+expect "Please specify the location of python*"
 send "\n"
 
-# Default python library path
-expect ":"
+expect "Please input the desired Python library path to use*"
 send "\n"
 
 expect "Do you wish to build TensorFlow with XLA JIT support?"
